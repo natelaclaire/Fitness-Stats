@@ -8,12 +8,12 @@ Author: Nate LaClaire <nate@natelaclaire.com>
 Author URI: http://natelaclaire.com/
 */
 
+// TODO: create plug-in stylesheet
+
 define('FITNESS_STATS_VERSION', '0.001');
 $fitness_stats_db_version = '0.001';
 define('FITNESS_STATS_PLUGIN_FILE', plugin_basename(__FILE__));
 define('FITNESS_STATS_PATH', dirname(__FILE__));
-
-global $wpdb;
 
 /*
  * Create or upgrade the Fitness Stats database table
