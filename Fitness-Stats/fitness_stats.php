@@ -236,7 +236,7 @@ register_sidebar_widget('Fitness Stats Chart', 'fitness_stats_tracking_widget');
  * Latest Fitness Check-In widget
  */
 function fitness_stats_widget($args) {
-    global $wpdb;
+	global $wpdb;
 	$height = get_option('fitness_stats_height');
 	
 	// convert the $args array into standalone variables
