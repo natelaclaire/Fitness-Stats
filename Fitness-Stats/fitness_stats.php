@@ -19,14 +19,14 @@ define('FITNESS_STATS_PATH', dirname(__FILE__));
  * Create or upgrade the Fitness Stats database table
  */
 function fitness_stats_install () {
-   global $wpdb;
-   global $fitness_stats_db_version;
-
-   $table_name = $wpdb->prefix . "fitness_stats";
-   
-   // check to see if the database table exists at all and, if not, create it
-   if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
-   
+	global $wpdb;
+	global $fitness_stats_db_version;
+	
+	$table_name = $wpdb->prefix . "fitness_stats";
+	
+	// check to see if the database table exists at all and, if not, create it
+	if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+	
 		$sql = "CREATE TABLE " . $table_name . " (
 				  id mediumint(9) NOT NULL AUTO_INCREMENT,
 				  dt date NOT NULL,
@@ -35,20 +35,20 @@ function fitness_stats_install () {
 				  notes text NOT NULL,
 				  PRIMARY KEY  id (id)
 				);";
-
+		
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 		dbDelta($sql);
 		
 		add_option("fitness_stats_db_version", $fitness_stats_db_version);
-   
-   }
-   
-   // check the current database table version and upgrade if necessary
-   $installed_ver = get_option( "fitness_stats_db_version" );
-
-   if( $installed_ver != $fitness_stats_db_version ) {
-
-      $sql = "CREATE TABLE " . $table_name . " (
+	
+	}
+	
+	// check the current database table version and upgrade if necessary
+	$installed_ver = get_option( "fitness_stats_db_version" );
+	
+	if( $installed_ver != $fitness_stats_db_version ) {
+	
+		$sql = "CREATE TABLE " . $table_name . " (
 				  id mediumint(9) NOT NULL AUTO_INCREMENT,
 				  dt date NOT NULL,
 				  waist decimal(5,2) NOT NULL,
@@ -56,12 +56,12 @@ function fitness_stats_install () {
 				  notes text NOT NULL,
 				  PRIMARY KEY  id (id)
 				);";
-
-      require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-      dbDelta($sql);
-
-      update_option( "fitness_stats_db_version", $fitness_stats_db_version );
-  }
+		
+		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+		dbDelta($sql);
+		
+		update_option( "fitness_stats_db_version", $fitness_stats_db_version );
+	}
 } // end function fitness_stats_install ()
 register_activation_hook(__FILE__,'fitness_stats_install');
 
@@ -74,7 +74,7 @@ if ( is_admin() ){ // admin actions
  * Create the menu item for the administrative area
  */
 function fitness_stats_menu() {
-  add_submenu_page('edit.php', 'Fitness Stats', 'Fitness Stats', 'administrator', 'fitness_stats_options', 'fitness_stats_options');
+	add_submenu_page('edit.php', 'Fitness Stats', 'Fitness Stats', 'administrator', 'fitness_stats_options', 'fitness_stats_options');
 }
 
 /*
@@ -131,7 +131,7 @@ function fitness_stats_options() {
 	wp_nonce_field('update-options');
 	echo '<label for="fitness_stats_height">Height (inches):</label> <input type="text" name="fitness_stats_height" id="fitness_stats_height" value="'.$height.'" /><br />';
 	echo '<input type="hidden" name="action" value="update" />';
-    echo '<input type="hidden" name="page_options" value="fitness_stats_height" />';
+	echo '<input type="hidden" name="page_options" value="fitness_stats_height" />';
 	echo '<p class="submit">';
 	echo '<input type="submit" class="button" value="Save Changes" />';
 	echo '</p>';
@@ -184,7 +184,7 @@ add_action('admin_post_delete_fitness_stats', 'delete_fitness_stats');
  * Widget (for sidebar/footer/etc) that displays a BMI chart
  */
 function fitness_stats_tracking_widget($args) {
-    global $wpdb;
+	global $wpdb;
 	$height = get_option('fitness_stats_height');
 	
 	// convert the $args array into standalone variables
